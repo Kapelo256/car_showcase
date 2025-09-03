@@ -6,6 +6,7 @@ import CarCard from "@/components/CarCard";
 import cars from "../public/cars.json";
 import { HomeProps } from "@/types";
 import { fuels, yearsOfProduction } from "@/constants";
+import ShowMore from "@/components/ShowMore";
 
 export default async function Home({ searchParams }: HomeProps) {
   const allCars = await fetchCars({
@@ -43,6 +44,10 @@ export default async function Home({ searchParams }: HomeProps) {
                 <CarCard car={car} />
               ))}
             </div>
+            <ShowMore
+              pageNumber={(searchParams.limit || 10) / 10}
+              isNext={(searchParams.limit || 10) > allCars.length}
+            />
           </section>
         ) : (
           <div className="home__error-container">
